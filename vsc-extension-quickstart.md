@@ -8,10 +8,11 @@ This extension has been created to improve development of Web Components created
 
 Use `/*html*/` to let VS Code know which literals to apply it to.
 
+It will format the document on save, if enabled, and with the format keybinding `alt+shift+f`
+
 ## Example
 
 ![](https://github.com/thomas-ziirsen/web-component-vs-code-extension/raw/main/src/images/usage.png)
-
 
 ## To come
 Support for CSS syntax and formatting

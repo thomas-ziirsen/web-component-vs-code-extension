@@ -4,7 +4,16 @@
   "description": "Format and highlight HTML code inside ES6 string literal in JavaScript or TypeScript",
   "version": "1.0.0",
   "license": "MIT",
-  "publisher": "Thomas Ziirsen",
+  "publisher": "Thomas Melchior Ziirsen",
+  "author": {
+    "email": "thomas.ziirsen@gmail.com",
+    "name": "Thomas Melchior Ziirsen"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thomas-ziirsen/web-component-vs-code-extension"
+  },
+	"icon": "icon.png",
   "engines": {
     "vscode": "^1.77.0"
   },
@@ -27,12 +36,6 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-		"commands": [
-			{
-				"command": "editor.action.formatInlineHtml",
-				"title": "Format Inline HTML/CSS"
-			}
-		],
 		"grammars": [
 			{
 				"injectTo": [
@@ -64,6 +67,18 @@
 					"meta.template.expression.ts": "typescript"
 				}
 			}
+		],
+		"keybindings": [
+			{
+				"command": "formatHtmlInWebComponent.format",
+				"key": "alt+shift+f",
+				"when": "editorLangId == javascript"
+			},
+			{
+				"command": "formatHtmlInWebComponent.format",
+				"key": "alt+shift+f",
+				"when": "editorLangId == typescript"
+			}
 		]
 	},
   "scripts": {
@@ -71,10 +86,6 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "package": "vsce package"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/thomas-ziirsen/web-component-vs-code-extension"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",

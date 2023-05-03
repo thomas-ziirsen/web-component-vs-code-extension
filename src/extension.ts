@@ -28,7 +28,7 @@ class DocumentWatcher {
 				const last = editor.document.lineAt(editor.document.lineCount - 1);
 				const range = new vscode.Range(new vscode.Position(0, 0), last.range.end);
 
-				event.waitUntil(this.doPreSaveTransformations(event.document, event.reason).then((content: any) => {
+				event.waitUntil(this.doPreSaveTransformations().then((content: any) => {
 					editor.edit(edit => {
 						if (content !== '') {
 							edit.replace(range, content);
@@ -43,6 +43,33 @@ class DocumentWatcher {
 			}
 		}));
 
+
+		subscriptions.push(vscode.commands.registerCommand('formatHtmlInWebComponent.format', (event) => {
+			const editor = vscode.window.activeTextEditor;
+			const cursor = editor?.selection.active;
+
+			if (!editor || !cursor) {
+				return;
+			}
+
+			const last = editor?.document.lineAt(editor.document.lineCount - 1);
+			const range = new vscode.Range(new vscode.Position(0, 0), last?.range?.end);
+
+			this.doPreSaveTransformations().then((content: any) => {
+				editor?.edit(edit => {
+					if (content !== '') {
+						edit.replace(range, content);
+					}
+				}).then(success => {
+					if (success && content !== '') {
+						const origSelection = new vscode.Selection(cursor, cursor);
+						editor.selection = origSelection;
+					}
+				});
+			});
+		}));
+
+
 		this.disposable = vscode.Disposable.from.apply(this, subscriptions);
 	}
 
@@ -50,7 +77,7 @@ class DocumentWatcher {
 		this.disposable.dispose();
 	}
 
-	doPreSaveTransformations(doc: any, reason: any) {
+	doPreSaveTransformations() {
 		return new Promise((resolve, reject) => {
 			const config = vscode.workspace.getConfiguration();
 
@@ -74,23 +101,19 @@ class DocumentWatcher {
 				}
 			}
 
-			vscode.window.showInformationMessage(config.editor.formatOnSave.toString());
-
 			// Format code
 			if (config.editor.formatOnSave === true || tsScopedFormatVal || jsScopedFormatVal) {
 				const html = vscode?.window?.activeTextEditor?.document.getText() ?? "";
-				const options = undefined; //optionsFromVsCode_1.default(config);
+				const options = undefined;
 				const formattedHtml = beautifyHtml.html(html, options);
 				const formattedJS = beautifyHtml.js(formattedHtml, options);
 
-				// todo: use regex to loop through all code chunks
 				try {
 					this.lastPointer = 0;
 
 					// Format HTML
 					const getAllChunks = formattedJS.toString().match(/(\*html\*)/gm) || [];
 
-					// const getAllChunks = formattedJS.toString().match(/(\*html\*)/gm);
 					let loops = 0;
 					let combinedCode = '';
 
@@ -126,16 +149,15 @@ class DocumentWatcher {
 	formatCodeChunk(formattedJS: string, lastPointer: number, iteration: number, end: number) {
 
 		try {
-			const getInnerHtmlStartIndex = formattedJS.indexOf("/*html*/", lastPointer); // f
+			const getInnerHtmlStartIndex = formattedJS.indexOf("/*html*/", lastPointer);
 			const getInnerHtmlCodeStartIndex = formattedJS.indexOf("`", getInnerHtmlStartIndex);
 			const getInnerHtmlCodeEndIndex = formattedJS.indexOf("`", getInnerHtmlCodeStartIndex + 1);
 
 			// Get indentation level from where innerHtml starts
-			// todo: check if its innerHTML or /*html*/ 
 			const indentLevelOfInnerHTML = formattedJS.substring(lastPointer + 1, getInnerHtmlStartIndex);
 			const listOfLinesfromStart = indentLevelOfInnerHTML.split('\n');
 			const innerHtmlLine = listOfLinesfromStart[ listOfLinesfromStart.length - 1 ];
-			const getTabIndent = innerHtmlLine.substring(0, innerHtmlLine.search(/(const|let|var|this)/gm)); // const | let | var
+			const getTabIndent = innerHtmlLine.substring(0, innerHtmlLine.search(/(const|let|var|this)/gm));
 
 			// Get the html chunk
 			const chunk = formattedJS.substring(getInnerHtmlCodeStartIndex, getInnerHtmlCodeEndIndex);
