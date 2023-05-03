@@ -1,0 +1,103 @@
+{
+  "name": "web-component-html-formatter",
+  "displayName": "Web component HTML formatter and highlighter",
+  "description": "Format and highlight HTML code inside ES6 string literal in JavaScript or TypeScript",
+  "version": "1.0.0",
+  "license": "MIT",
+  "publisher": "Thomas Ziirsen",
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters"
+  ],
+  "keywords": [
+    "html",
+    "css",
+    "template",
+    "web components",
+    "innerhtml",
+    "inner html",
+    "javascript",
+    "es6 string literal"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+		"commands": [
+			{
+				"command": "editor.action.formatInlineHtml",
+				"title": "Format Inline HTML/CSS"
+			}
+		],
+		"grammars": [
+			{
+				"injectTo": [
+					"source.js",
+					"source.js.jsx",
+					"source.jsx",
+					"source.ts",
+					"source.tsx"
+				],
+				"scopeName": "es6.inline.html",
+				"path": "./syntaxes/es6.inline.html.json",
+				"embeddedLanguages": {
+					"meta.embedded.block.html": "html",
+					"meta.template.expression.ts": "typescript"
+				}
+			},
+			{
+				"injectTo": [
+					"source.js",
+					"source.js.jsx",
+					"source.jsx",
+					"source.ts",
+					"source.tsx"
+				],
+				"scopeName": "es6.inline.css",
+				"path": "./syntaxes/es6.inline.css.json",
+				"embeddedLanguages": {
+					"meta.embedded.block.css": "css",
+					"meta.template.expression.ts": "typescript"
+				}
+			}
+		]
+	},
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thomas-ziirsen/web-component-vs-code-extension"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/js-beautify": "^1.13.3",
+    "@types/lodash.get": "^4.4.7",
+    "@types/lodash.has": "^4.5.7",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.77.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "@vscode/test-electron": "^2.3.0",
+    "eslint": "^8.36.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "js-beautify": "^1.14.7",
+    "lodash.get": "^4.4.2",
+    "lodash.has": "^4.5.2",
+    "vscode-css-languageservice": "^5.1.0",
+    "vscode-emmet-helper": "^2.4.1",
+    "vscode-html-languageservice": "^4.0.1"
+  }
+}
