@@ -24,4 +24,4 @@ This software is released under the terms of the MIT license.
 
 ## History
 
-**v1.0.1 - It's LIVE!**
+**v1.0.0 - It's LIVE!**
