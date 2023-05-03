@@ -200,9 +200,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 	new formatting_1.CodeFormatterProvider();
 	vscode.languages.registerCompletionItemProvider([ 'typescript', 'javascript' ], new html_1.HTMLCompletionItemProvider(), '<', '!', '.', '}', ':', '*', '$', ']', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
-	vscode.languages.registerHoverProvider([ 'typescript', 'javascript' ], new hover_1.HTMLHoverProvider());
+	// vscode.languages.registerHoverProvider([ 'typescript', 'javascript' ], new hover_1.HTMLHoverProvider());
 	vscode.languages.registerCompletionItemProvider([ 'typescript', 'javascript' ], new css_1.HTMLStyleCompletionItemProvider(), '!', '.', '}', ':', '*', '$', ']', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
-	vscode.languages.registerHoverProvider([ 'typescript', 'javascript' ], new hover_1.CSSHoverProvider());
+	// vscode.languages.registerHoverProvider([ 'typescript', 'javascript' ], new hover_1.CSSHoverProvider());
 	vscode.languages.registerCompletionItemProvider([ 'typescript', 'javascript' ], new css_1.CSSCompletionItemProvider(), '!', '.', '}', ':', '*', '$', ']', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
 
 }
