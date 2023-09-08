@@ -8,7 +8,7 @@ This extension has been created to improve development of Web Components created
 
 Use `/*html*/` to let VS Code know which literals to apply it to.
 
-It will format the document on save, if enabled, and with the format keybinding `alt+shift+f`
+It will format the document on save, if enabled, and with the format keybinding `shift+alt+f`
 
 ## Example
 
@@ -29,4 +29,5 @@ This software is released under the terms of the MIT license.
 
 ## History
 
-* v1.0.1 - It's LIVE!
+* v1.0.2 - It's LIVE!
+* v1.0.3 - Added support for using workspace tabSize with beautify
