@@ -25,7 +25,7 @@ Support for CSS syntax and formatting
 
 ## License
 
-This software is released under the terms of the MIT license.
+This software is released under the terms of the DOOM license - beware!
 
 ## History
 
