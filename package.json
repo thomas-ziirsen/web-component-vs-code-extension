@@ -2,7 +2,7 @@
     "name": "web-component-formatter",
     "displayName": "Web component HTML formatter and highlighter",
     "description": "Format and highlight HTML code inside ES6 string literal in JavaScript or TypeScript",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "license": "DOOM",
     "publisher": "begaroth",
     "author": {
@@ -35,7 +35,7 @@
         "onLanguage:javascript",
         "onLanguage:typescript"
     ],
-    "main": "./out/main.js",
+    "main": "./out/extension.js",
     "contributes": {
         "grammars": [
             {
