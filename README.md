@@ -29,7 +29,7 @@ This software is released under the terms of the DOOM license - beware!
 
 ## History
 
-* v1.0.2 - It's LIVE!
+* v1.0.0 - It's LIVE!
 * v1.0.3 - Added support for using workspace tabSize with beautify
 * v1.0.4 - Moved ownership to own Azure Organization
 * v1.0.5 - Bundled extension files for faster load
