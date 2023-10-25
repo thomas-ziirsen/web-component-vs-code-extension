@@ -1,9 +1,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import get = require("lodash.get");
-import has = require("lodash.has");
-// import beautifyHtml = require("js-beautify");
 
 // Get stuff from Colton's ext.
 import html_1 = require("./client/providers/html");
@@ -48,9 +45,10 @@ class DocumentWatcher {
         if (!editor || !cursor) {
             return;
         }
-
+        
         const config = vscode.workspace.getConfiguration();
-        const indentSize: number = get(config, 'editor.tabSize') || 2;
+        const indentSize: number = config?.editor?.tabSize || 2;
+
         const last = editor?.document.lineAt(editor.document.lineCount - 1);
         const range = new vscode.Range(new vscode.Position(0, 0), last?.range?.end);
 
@@ -78,21 +76,21 @@ class DocumentWatcher {
 
             // Check TS
             const editor = vscode.window.activeTextEditor;
-            const tsScopedFormat = has(config, '[typescript]');
+            const tsScopedFormat = config?.["[typescript]"] || false;
             let tsScopedFormatVal = false;
             if (tsScopedFormat || editor?.document.fileName.endsWith('.ts')) {
-                const tsScopedObj = get(config, '[typescript]');
-                if (tsScopedObj['editor.formatOnSave'] || editor?.document.fileName.endsWith('.ts')) {
+                const tsScopedObj = config?.["[typescript]"] || null;
+                if (tsScopedObj && tsScopedObj['editor.formatOnSave'] || editor?.document.fileName.endsWith('.ts')) {
                     tsScopedFormatVal = true;
                 }
             }
 
             // Check JS
-            const jsScopedFormat = has(config, '[javascript]');
+            const jsScopedFormat = config?.["[javascript]"] || false;
             let jsScopedFormatVal = false;
             if (jsScopedFormat) {
-                const jsScopedObj = get(config, '[javascript]');
-                if (jsScopedObj['editor.formatOnSave'] || editor?.document.fileName.endsWith('.js')) {
+                const jsScopedObj = config?.["[javascript]"] || null;
+                if (jsScopedObj && jsScopedObj['editor.formatOnSave'] || editor?.document.fileName.endsWith('.js')) {
                     jsScopedFormatVal = true;
                 }
             }
@@ -196,6 +194,7 @@ class DocumentWatcher {
 
 
 export function activate(context: vscode.ExtensionContext) {
+
     const docWatch = new DocumentWatcher();
     context.subscriptions.push(docWatch);
 
