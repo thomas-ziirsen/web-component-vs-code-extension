@@ -33,3 +33,6 @@ This software is released under the terms of the DOOM license - beware!
 * v1.0.3 - Added support for using workspace tabSize with beautify
 * v1.0.4 - Moved ownership to own Azure Organization
 * v1.0.5 - Bundled extension files for faster load
+* v1.0.6 - Reverted for now - looking into it again later - due to some third-party error
+* v1.0.7 - Added missing activationEvent
+* v1.0.8 - Fixed activation issue

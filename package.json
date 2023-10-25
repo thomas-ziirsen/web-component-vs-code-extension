@@ -2,7 +2,7 @@
     "name": "web-component-formatter",
     "displayName": "Web component HTML formatter and highlighter",
     "description": "Format and highlight HTML code inside ES6 string literal in JavaScript or TypeScript",
-    "version": "1.0.6",
+    "version": "1.0.8",
     "license": "DOOM",
     "publisher": "begaroth",
     "author": {
@@ -33,7 +33,8 @@
     ],
     "activationEvents": [
         "onLanguage:javascript",
-        "onLanguage:typescript"
+        "onLanguage:typescript",
+        "onCommand:formatHtmlInWebComponent.format"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -90,8 +91,6 @@
     "devDependencies": {
         "@types/glob": "^8.1.0",
         "@types/js-beautify": "^1.13.3",
-        "@types/lodash.get": "^4.4.7",
-        "@types/lodash.has": "^4.5.7",
         "@types/mocha": "^10.0.1",
         "@types/node": "16.x",
         "@types/vscode": "^1.77.0",
@@ -102,15 +101,13 @@
         "eslint": "^8.36.0",
         "glob": "^8.1.0",
         "mocha": "^10.2.0",
-        "typescript": "^4.9.5",
         "vsce": "^2.15.0"
     },
     "dependencies": {
         "js-beautify": "^1.14.7",
-        "lodash.get": "^4.4.2",
-        "lodash.has": "^4.5.2",
         "vscode-css-languageservice": "^5.1.0",
         "vscode-emmet-helper": "^2.4.1",
-        "vscode-html-languageservice": "^4.0.1"
+        "vscode-html-languageservice": "^4.0.1",
+        "typescript": "^4.9.5"
     }
 }
